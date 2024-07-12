@@ -20,8 +20,8 @@ body {
 }
 
 .appTab .appTabBody {
-  width: 70vw;
-  height: 70vh;
+  width: 80vw;
+  height: 100vh;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
   overflow: hidden;
@@ -60,7 +60,7 @@ body {
 /* BODY */
 .appBody {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1.5fr 2fr;
   background-color: white;
   height: 100%;
   padding: 20px;
@@ -73,15 +73,37 @@ body {
 /* BODY RIGHT SIDE */
 .appDetails {
   flex-direction: column;
-  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .appDetails hr {
   margin: 0;
-  width: 50%;
+  width: 80%;
   display: flex;
+  border-width: 2px;
 }
 
-.registration {
-  margin-bottom: 5px;
+.appDetails .registration {
+  margin: 10px 0 5px 0;
+}
+
+.appDetails form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.appDetails .asterisk {
+  color: red;
+}
+
+.appDetails label {
+  padding: 10px 0;
+}
+
+.appDetails input {
+  border: 0.5px solid #aeaeae;
+  height: 35px;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }

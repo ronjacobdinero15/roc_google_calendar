@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Event Form</title>
 
+    <link rel="stylesheet" href="./build/css/demo.css" />
+    <link rel="stylesheet" href="./build/css/intlTelInput.css" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -20,50 +22,53 @@
           <div class="appDetails">
             <p class="registration">Registration</p>
             <hr />
+            <form onsubmit="handleSubmit(event)">
+              <label for="name">Name <span class="asterisk">*</span></label>
+              <input type="text" id="name" required />
+
+              <label for="email"
+                >Your email address <span class="asterisk">*</span></label
+              >
+              <input type="email" id="email" required />
+
+              <label for="phone"
+                >Mobile number <span class="asterisk">*</span></label
+              >
+              <input type="tel" id="phone" />
+
+              <button type="submit">Submit</button>
+            </form>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- <form id="eventForm" onsubmit="submitForm(event)">
-      <input
-        id="name"
-        type="text"
-        placeholder="Name"
-        value="Meeting with Client"
-        required
-      />
-      <input
-        id="email"
-        type="email"
-        placeholder="Email"
-        value="your-email@example.com"
-        required
-      />
-      <input
-        id="phone"
-        type="tel"
-        placeholder="Phone Number"
-        value="+123456789"
-      />
-      <input id="date" type="date" value="2024-07-13" required />
-      <input id="time" type="time" value="14:00" required />
-      <input
-        id="gmt"
-        type="text"
-        placeholder="GMT Offset"
-        value="+08:00"
-        required
-      />
-      <input
-        id="additionalInfo"
-        type="text"
-        placeholder="Additional Info"
-        value="Discussion about project updates"
-      />
-      <button type="submit">Submit</button>
-    </form> -->
-
+    <script src="./build/js/intlTelInput.js"></script>
     <script src="script.js"></script>
+    <script>
+      var input = document.querySelector('#phone')
+      var iti = window.intlTelInput(input, {
+        initialCountry: 'auto',
+        separateDialCode: true,
+      })
+
+      function handleSubmit(event) {
+        event.preventDefault()
+
+        // Get the selected country code using the intlTelInput API
+        var countryCode = iti.getSelectedCountryData().dialCode
+
+        // Get the formatted phone number
+        var phoneNumber = iti.getNumber()
+
+        // Display alert with country code and phone number
+        alert(
+          'Selected Country Code: ' +
+            countryCode +
+            '\nEntered Phone Number: ' +
+            input.value
+        )
+      }
+    </script>
   </body>
 </html>
