@@ -1,3 +1,6 @@
+const CEO_PREFERRED_MINIMUM_APPOINTMENT_TIME = 60 // 1 Hour
+const CEO_APPOINTMENT_EMAIL = 'roc.appointments@gmail.com'
+
 function submitForm(event) {
   event.preventDefault()
 
@@ -5,36 +8,42 @@ function submitForm(event) {
 
   // NOTE: Make use of phoneNumber
   const phoneNumber = handlePhoneNumber()
-  alert(phoneNumber)
 
   var myHeaders = new Headers()
   myHeaders.append('Content-Type', 'application/json')
 
   var name = document.getElementById('name').value
   var email = document.getElementById('email').value
-  var phone = document.getElementById('phone').value // Uncommented
   var date = document.getElementById('date').value
   var time = document.getElementById('time').value
-  var gmt = document.getElementById('gmt').value
   var description = document.getElementById('description').value
-  var dateTime = `${date}T${time}:00${gmt}`
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
+  // Create a Date object in local time
+  var localDateTime = new Date(`${date}T${time}:00`)
+
+  // Convert local time to UTC
+  var utcDateTime = localDateTime.toISOString()
+
+  // Calculate the end time (30 minutes later) in UTC
+  var utcEndDateTime = new Date(
+    localDateTime.getTime() + CEO_PREFERRED_MINIMUM_APPOINTMENT_TIME * 60000
+  ).toISOString()
 
   var formData = {
-    summary: name,
-    description,
+    summary: 'Client Meeting',
+    // TODO: Must create a meeting link
+    // TODO: Must email the client about this link
+    description: `What:\n60 Mins Meeting between <strong>Ron Clarin</strong> and <strong>${name}</strong>\n\nInvitee Time Zone:\n${timeZone}\n\nContact no.:\n+${phoneNumber}\n\nWho:\n\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${name}\n<a href="mailto:${email}">${email}</a>\n\nAdditional Notes:\n${description}`,
     start: {
-      dateTime: dateTime,
-      timeZone: 'Asia/Manila',
+      dateTime: utcDateTime,
+      timeZone: 'UTC', // Use UTC time zone for Google Calendar API
     },
     end: {
-      dateTime: new Date(
-        new Date(dateTime).getTime() + 30 * 60000
-      ).toISOString(),
-      timeZone: 'Asia/Manila',
+      dateTime: utcEndDateTime,
+      timeZone: 'UTC', // Use UTC time zone for Google Calendar API
     },
-    // NOTE: ADD GUEST EMAILS (OPTIONAL)
     attendees: [{ email }],
-    phone: phone, // Include phone number in formData
   }
 
   var requestOptions = {
@@ -45,7 +54,7 @@ function submitForm(event) {
   }
 
   fetch(
-    'https://v1.nocodeapi.com/ronjacobdinero15/calendar/fWxRyAQXGGAWfntR/event',
+    'https://v1.nocodeapi.com/rocappointments/calendar/eVzcIvSFHQgCDEuz/event',
     requestOptions
   )
     .then(response => response.text())
@@ -63,7 +72,6 @@ function handlePhoneNumber() {
 }
 
 function bookedModal() {
-  // NOTE: BOOKED MODAL
   var modal = document.getElementById('bookedModal')
 
   // Simulate form submission (replace with actual fetch or POST request)
@@ -82,5 +90,4 @@ function bookedModal() {
       modal.style.display = 'none'
     }
   }
-  // END OF BOOKED MODAL
 }

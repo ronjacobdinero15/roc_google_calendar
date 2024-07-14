@@ -189,9 +189,14 @@ textarea {
 }
 
 .appDetails .dateTime {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  margin: 25px 0 10px 0;
+  margin: 20px 0 10px 0;
+}
+
+.appDetails .dateTime input {
+  margin-top: 10px;
 }
 
 .appDetails .dateTime input,
@@ -298,4 +303,115 @@ textarea {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* MEDIA QUERIES */
+
+/* Smaller smartphones */
+@media only screen and (max-width: 480px) {
+  .appBody {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 25px;
+  }
+
+  .ceoDetails {
+    margin: 0 auto;
+    margin-bottom: 15px;
+    width: 80%;
+    align-items: center;
+  }
+
+  .ceoDetails .ceoName {
+    margin-top: 15px;
+  }
+
+  .ceoDetails .title {
+    text-align: center;
+  }
+
+  .ceoDetails .duration {
+    justify-content: center;
+  }
+
+  .appDetails .dateTime {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .appDetails input,
+  .appDetails select,
+  .appDetails #description {
+    margin-bottom: 5px !important;
+  }
+
+  .appDetails .cmdBtns {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  textarea {
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablets and larger smartphones */
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  textarea {
+    font-size: 0.9rem;
+  }
+
+  .appBody {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 25px;
+  }
+
+  .ceoDetails {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 80%;
+    gap: 20px;
+  }
+
+  .ceoDetails .ceo {
+    width: 90px;
+  }
+
+  .ceoDetails .profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .ceoDetails .ceoName {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .ceoDetails .title {
+    font-size: 1.7rem;
+  }
+
+  .ceoDetails .meetingInfo {
+    font-size: 0.5rem;
+  }
+
+  .ceoDetails .meetingInfo p {
+    margin: 5px 0;
+  }
+}
+
+/* Laptops, larger tablets in landscape, and small desktops */
+@media only screen and (min-width: 769px) and (max-width: 1279px) {
+}
+
+/* Larger desktops and monitors */
+@media only screen and (min-width: 1280px) {
 }
