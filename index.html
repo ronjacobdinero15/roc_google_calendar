@@ -3,72 +3,193 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Event Form</title>
+    <title>Book an Appointment | ROC PH</title>
 
-    <link rel="stylesheet" href="./build/css/demo.css" />
-    <link rel="stylesheet" href="./build/css/intlTelInput.css" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="./assets/img/roc-logo.png" />
+    <link rel="stylesheet" href="./assets/css/demo.css" />
+    <link rel="stylesheet" href="./assets/css/intlTelInput.css" />
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
     <div class="appTab">
       <div class="appTabBody">
         <div class="header">
-          <button class="back"><</button>
-          <img src="./assets/roc-logo.png" alt="roc-logo" />
+          <span class="back"
+            ><img src="./assets/img/back.svg" alt="back"
+          /></span>
+          <img class="logo" src="./assets/img/roc-logo.png" alt="roc-logo" />
         </div>
         <!-- Body -->
         <div class="appBody">
-          <div class="ceoDetails"></div>
+          <div class="ceoDetails">
+            <img class="ceo" src="./assets/img/ceo.jpg" alt="ceo" />
+            <p class="ceoName">Mr. Ron Clarin</p>
+            <p class="title">Product Demo</p>
+            <div class="meetingInfo">
+              <div class="duration">
+                <img
+                  class="meetingIcon"
+                  src="./assets/img/time.svg"
+                  alt="time"
+                />
+                <span>60 mins</span>
+              </div>
+              <p>
+                Speak with our CEO for 30 minutes 1:1 product demo for your
+                business requirement
+              </p>
+              <div class="googleMeeting">
+                <img
+                  class="meetingIcon"
+                  src="./assets/img/location.svg"
+                  alt="google meet"
+                />
+                <span>
+                  Google Meet - It's an online Google Meet meeting and you will
+                  receive meeting joining link on your email.</span
+                >
+              </div>
+            </div>
+          </div>
           <div class="appDetails">
-            <p class="registration">Registration</p>
-            <hr />
-            <form onsubmit="handleSubmit(event)">
+            <form onsubmit="submitForm(event)">
+              <p class="registration">Registration</p>
+              <hr />
+
               <label for="name">Name <span class="asterisk">*</span></label>
-              <input type="text" id="name" required />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                value="Janno Gibbs"
+              />
 
               <label for="email"
                 >Your email address <span class="asterisk">*</span></label
               >
-              <input type="email" id="email" required />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                value="ronjacobdinero15@gmail.com"
+              />
 
               <label for="phone"
                 >Mobile number <span class="asterisk">*</span></label
               >
-              <input type="tel" id="phone" />
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                maxlength="18"
+                required
+                value="123456789"
+              />
 
-              <button type="submit">Submit</button>
-            </form>
+              <div class="dateTime">
+                <div>
+                  <label for="date">Date <span class="asterisk">*</span></label>
+                  <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    required
+                    value="2024-07-13"
+                  />
+                </div>
+
+                <div>
+                  <label for="time">Time <span class="asterisk">*</span></label>
+                  <input
+                    type="time"
+                    id="time"
+                    name="time"
+                    required
+                    value="09:00"
+                  />
+                </div>
+
+                <!-- LATER: -->
+                <div>
+                  <label for="gmt">GMT <span class="asterisk">*</span></label>
+                  <select id="gmt" name="gmt" required>
+                    <option value="" disabled selected>
+                      Select your GMT offset
+                    </option>
+
+                    <option value="+00:00">+00:00 (UTC)</option>
+                    <option value="+01:00">+01:00 (GMT+1)</option>
+                    <option value="+02:00">+02:00 (GMT+2)</option>
+                    <option value="+03:00">+03:00 (GMT+3)</option>
+                    <option value="+04:00">+04:00 (GMT+4)</option>
+                    <option value="+05:00">+05:00 (GMT+5)</option>
+                    <option value="+06:00">+06:00 (GMT+6)</option>
+                    <option value="+07:00">+07:00 (GMT+7)</option>
+                    <option value="+08:00" selected>+08:00 (GMT+8)</option>
+                  </select>
+                </div>
+              </div>
+
+              <label for="description"
+                >Please share anything that will help prepare for our meeting
+              </label>
+              <textarea
+                name="description"
+                id="description"
+                value="Discussion about project updates"
+                placeholder="Please share any details or topics you'd like to discuss during the meeting..."
+                ></textarea>
+
+              <div class="cmdBtns">
+                <button class="submitBtn" type="submit">
+                  <img
+                    class="bookingIcon"
+                    src="./assets/img/booking.png"
+                    alt="booking"
+                  />
+                  Confirm booking
+                </button>
+                <button class="cancelBtn">Cancel</button>
+              </div>
+
+              <footer class="bookingReminder">
+                By registration you agree to our
+                <span class="policies" id="togglePoliciesModal">
+                  reschedule and cancellation policies...
+                </span>
+
+              </footer>
+              
+              <!-- POLICIES MODAL -->
+                <div class="policiesModal" id="policiesModal">
+                  <div class="modal-content">
+                    <h4>Reschedule policy</h4>
+                    <p>The reschedule must be before the scheduled time, if needed.</p>
+                    <h4>Cancellation policy</h4>
+                    <p>The cancellation must be before the scheduled time, if needed.</p>
+                  </div>
+                </div>
+              <!-- END OF POLICIES MODAL -->
+
+
+            <!-- BOOKED MODAL -->
+            <div id="bookedModal">
+              <div class="bookedModal-content">
+                <span class="close">&times;</span>
+                <p>✅ Form submitted successfully!</p>
+              </div>
+            </div>
+            <!-- END OF BOOKED MODAL -->
           </div>
         </div>
       </div>
     </div>
 
-    <script src="./build/js/intlTelInput.js"></script>
-    <script src="script.js"></script>
-    <script>
-      var input = document.querySelector('#phone')
-      var iti = window.intlTelInput(input, {
-        initialCountry: 'auto',
-        separateDialCode: true,
-      })
-
-      function handleSubmit(event) {
-        event.preventDefault()
-
-        // Get the selected country code using the intlTelInput API
-        var countryCode = iti.getSelectedCountryData().dialCode
-
-        // Get the formatted phone number
-        var phoneNumber = iti.getNumber()
-
-        // Display alert with country code and phone number
-        alert(
-          'Selected Country Code: ' +
-            countryCode +
-            '\nEntered Phone Number: ' +
-            input.value
-        )
-      }
-    </script>
+    <script src="./assets/js/intlTelInput.js"></script>
+    <script src="./booking.js"></script>
+    <script src="./assets/js/intlTelInputPreference.js"></script>
+    <script src="./assets/js/policiesModal.js"></script>
   </body>
 </html>
