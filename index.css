@@ -154,16 +154,6 @@ textarea {
   font-weight: 600;
 }
 
-.appDetails hr {
-  margin: 0;
-  display: flex;
-  border-width: 2px;
-}
-
-.appDetails .registration {
-  margin: 10px 0 5px 0;
-}
-
 .appDetails form {
   display: flex;
   flex-direction: column;
@@ -258,7 +248,13 @@ textarea {
   border-radius: 10px;
 }
 
+.policiesModal h1 {
+  color: black;
+  margin-bottom: 20px;
+}
+
 .policiesModal h4 {
+  color: black;
   margin: 0;
 }
 
@@ -308,12 +304,12 @@ textarea {
 /* MEDIA QUERIES */
 
 /* Smaller smartphones */
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 481px) {
   .appBody {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    padding: 25px;
+    padding: 10px;
+    padding-bottom: 25px;
   }
 
   .ceoDetails {
@@ -356,6 +352,11 @@ textarea {
 
   textarea {
     font-size: 0.9rem;
+  }
+
+  footer {
+    margin: 0 auto;
+    text-align: center;
   }
 }
 

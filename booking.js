@@ -32,6 +32,7 @@ function submitForm(event) {
 
   var formData = {
     summary: 'Client Meeting',
+
     // TODO: Must create a meeting link
     // TODO: Must email the client about this link
     description: `What:\n60 Mins Meeting between <strong>Ron Clarin</strong> and <strong>${name}</strong>\n\nInvitee Time Zone:\n${timeZone}\n\nContact no.:\n+${phoneNumber}\n\nWho:\n\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${name}\n<a href="mailto:${email}">${email}</a>\n\nAdditional Notes:\n${description}`,
@@ -43,7 +44,13 @@ function submitForm(event) {
       dateTime: utcEndDateTime,
       timeZone: 'UTC', // Use UTC time zone for Google Calendar API
     },
-    attendees: [{ email }],
+    attendees: [
+      { email: 'fakeemail1@example.com' },
+      { email: 'fakeemail2@example.com' },
+      { email: 'fakeemail3@example.com' },
+      { email: 'fakeemail4@example.com' },
+      { email: 'fakeemail5@example.com' },
+    ],
   }
 
   var requestOptions = {

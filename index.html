@@ -28,7 +28,7 @@
             </div>
             
             <div class="meetingInfo">
-              <p class="title">Product Demo</p>
+              <p class="title">Design Consultation</p>
               <div class="duration">
                 <img
                   class="meetingIcon"
@@ -38,8 +38,7 @@
                 <span>60 mins</span>
               </div>
               <p>
-                Speak with our CEO for 30 minutes 1:1 product demo for your
-                business requirement
+                Schedule a tailored graphic design consultation to address your specific business needs.
               </p>
               <div class="googleMeeting">
                 <img
@@ -48,17 +47,13 @@
                   alt="google meet"
                 />
                 <span>
-                  Google Meet - It's an online Google Meet meeting and you will
-                  receive meeting joining link on your email.</span
+                  Google Meet - This will be an online meeting via Google Meet. The meeting link will be sent to your email.</span
                 >
               </div>
             </div>
           </div>
           <div class="appDetails">
             <form onsubmit="submitForm(event)">
-              <p class="registration">Registration</p>
-              <hr />
-
               <label for="name">Name <span class="asterisk">*</span></label>
               <input
                 type="text"
@@ -69,14 +64,13 @@
               />
 
               <label for="email"
-                >Your email address <span class="asterisk">*</span></label
+                >Email address <span class="asterisk">*</span></label
               >
               <input
                 type="email"
                 id="email"
                 name="email"
                 required
-                value="ronjacobdinero15@gmail.com"
               />
 
               <label for="phone"
@@ -136,7 +130,7 @@
               </div>
 
               <label for="description"
-                >Please share anything that will help prepare for our meeting
+                >Additional Information
               </label>
               <textarea
                 name="description"
@@ -152,15 +146,15 @@
                     src="./assets/img/booking.png"
                     alt="booking"
                   />
-                  Confirm booking
+                  Schedule Booking
                 </button>
                 <button class="cancelBtn">Cancel</button>
               </div>
 
-              <footer class="bookingReminder">
-                By registration you agree to our
+              <footer class="bookingReminder">        
+                By registering, you agree to our
                 <span class="policies" id="togglePoliciesModal">
-                  reschedule and cancellation policies...
+                  terms and conditions
                 </span>
 
               </footer>
@@ -168,10 +162,26 @@
               <!-- POLICIES MODAL -->
                 <div class="policiesModal" id="policiesModal">
                   <div class="modal-content">
-                    <h4>Reschedule policy</h4>
+                    <h1>By registering, you accept these terms.</h1>
+                    <h4>Scheduling</h4>
+                    <p>Appointments are based on availability.</p>
+                    <h4>Rescheduling and Cancellation</h4>
+                    <p>Reschedule or cancel 24 hours in advance.</p>
+                    <h4>Privacy</h4>
+                    <p>Your information is used solely for the service.</p>
+                    <h4>Liability</h4>
+                    <p>We are not liable for any service-related damages.</p>
+                    <h4>Changes to Terms</h4>
+                    <p>Terms may be updated on our website.</p>
+                    <h4>Contact Information</h4>
+                    <p>Contact us at [your contact information].</p>
+                    
+
+
+                    <!-- <h4>Reschedule policy</h4>
                     <p>The reschedule must be before the scheduled time, if needed.</p>
                     <h4>Cancellation policy</h4>
-                    <p>The cancellation must be before the scheduled time, if needed.</p>
+                    <p>The cancellation must be before the scheduled time, if needed.</p> -->
                   </div>
                 </div>
               <!-- END OF POLICIES MODAL -->
