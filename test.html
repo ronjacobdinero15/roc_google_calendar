@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Guest Email</title>
+    <style>
+      .guestEmailContainer {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+      }
+
+      .guestEmailContainer input {
+        margin-right: 10px;
+      }
+
+      .deleteButton {
+        background-color: red;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 5px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="emailContainer">
+      <input type="email" class="email" name="email" required />
+    </div>
+    <button id="addGuest">
+      <img src="./assets/img/add_people.svg" alt="add people" /> Add Guest
+    </button>
+
+    <script>
+      function addGuest() {
+        const emailContainer = document.querySelector('.emailContainer')
+        const guestEmailContainer = document.createElement('div')
+        guestEmailContainer.classList.add('guestEmailContainer')
+
+        guestEmailContainer.innerHTML = `
+        <input type="email" class="email" name="email" />
+        <button class="deleteButton">Delete</button>
+      `
+
+        emailContainer.appendChild(guestEmailContainer)
+
+        const deleteButton = guestEmailContainer.querySelector('.deleteButton')
+        deleteButton.addEventListener('click', function () {
+          guestEmailContainer.remove()
+        })
+      }
+
+      document.getElementById('addGuest').addEventListener('click', addGuest)
+    </script>
+  </body>
+</html>

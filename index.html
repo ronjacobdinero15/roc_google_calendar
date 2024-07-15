@@ -11,10 +11,14 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <div class="appTab">
-      <div class="appTabBody">
+    <button onclick="appointmentFormModal()">Open Appointment Form</button>
+
+    <h1 style="font-size: 9rem;">TEST</h1>
+    
+    <div class="appTab" id="appointmentFormModal">
+      <div class="appTabBody" >
         <div class="header">
-          <span class="back"
+          <span class="back" onclick="closeAppointmentFormModal()"
             ><img src="./assets/img/back.svg" alt="back"
           /></span>
           <img class="logo" src="./assets/img/roc-logo.png" alt="roc-logo" />
@@ -64,14 +68,22 @@
               />
 
               <label for="email"
-                >Email address <span class="asterisk">*</span></label
+              >Email address <span class="asterisk">*</span></label
               >
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-              />
+              <div class="emailContainer">
+                <input
+                  type="email"
+                  class="email"
+                  name="email"
+                  required
+                  value="ronjacobdinero15@gmail.com"
+                />
+                
+              </div>
+              <button type="button" id="addGuest">
+                <img src="./assets/img/add_people.svg" alt="add people">
+                Add Guest
+              </button>
 
               <label for="phone"
                 >Mobile number <span class="asterisk">*</span></label
@@ -82,7 +94,7 @@
                 name="phone"
                 maxlength="18"
                 required
-                value="123456789"
+                value="12312312312"
               />
 
               <div class="dateTime">
@@ -148,7 +160,7 @@
                   />
                   Schedule Booking
                 </button>
-                <button class="cancelBtn">Cancel</button>
+                <button class="cancelBtn" type="button" onclick="closeAppointmentFormModal()">Cancel</button>
               </div>
 
               <footer class="bookingReminder">        
@@ -156,13 +168,13 @@
                 <span class="policies" id="togglePoliciesModal">
                   terms and conditions
                 </span>
-
               </footer>
               
               <!-- POLICIES MODAL -->
                 <div class="policiesModal" id="policiesModal">
                   <div class="modal-content">
                     <h1>By registering, you accept these terms.</h1>
+                    <hr>
                     <h4>Scheduling</h4>
                     <p>Appointments are based on availability.</p>
                     <h4>Rescheduling and Cancellation</h4>
@@ -204,5 +216,6 @@
     <script src="./booking.js"></script>
     <script src="./assets/js/intlTelInputPreference.js"></script>
     <script src="./assets/js/policiesModal.js"></script>
+    <script src="./assets/js/addGuest.js"></script>
   </body>
 </html>

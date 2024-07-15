@@ -1,0 +1,19 @@
+function addGuest() {
+  const emailContainer = document.querySelector('.emailContainer')
+  const guestEmailContainer = document.createElement('div')
+  guestEmailContainer.classList.add('guestEmailContainer')
+
+  guestEmailContainer.innerHTML = `
+        <input type="email" class="email guestEmail" name="email" placeholder="Guest Email" required/>
+        <button class="deleteButton">&times;</button>
+      `
+
+  emailContainer.appendChild(guestEmailContainer)
+
+  const deleteButton = guestEmailContainer.querySelector('.deleteButton')
+  deleteButton.addEventListener('click', function () {
+    guestEmailContainer.remove()
+  })
+}
+
+document.getElementById('addGuest').addEventListener('click', addGuest)
