@@ -12,6 +12,7 @@ let description = document.getElementById('description')
 let appointmentFormModalDisplay = document.getElementById(
   'appointmentFormModal'
 )
+let rescheduleActive = false
 let attendees = []
 let client = {}
 let myHeaders = new Headers()
@@ -207,4 +208,51 @@ function cancelAppointment() {
     '.scheduledAppointmentBtns'
   )
   scheduledAppointmentBtns.innerHTML = ''
+}
+
+function scheduledAppointment() {
+  // DISPLAY NONE CURRENT SCREEN
+  const appTabBody = document.querySelector('.appTabBody')
+  const appBody = document.querySelector('.appBody')
+
+  const ceoDetails = document.querySelector('.ceoDetails')
+  const appDetails = document.querySelector('.appDetails')
+  const scheduledAppointment = document.querySelector('.scheduledAppointment')
+
+  appTabBody.style.cssText = 'width: 30vw !important;'
+  appBody.style.cssText = `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `
+  scheduledAppointment.setAttribute('style', 'display: flex !important;')
+  ceoDetails.setAttribute('style', 'display: none !important;')
+  appDetails.setAttribute('style', 'display: none !important;')
+
+  // DISPLAY SCHEDULED APPOINTMENT UI
+  if (!rescheduleActive) {
+    const scheduledAppointmentContainer = document.querySelector(
+      '.scheduledAppointment'
+    )
+    const detailsContainer = document.createElement('div')
+
+    detailsContainer.innerHTML = `
+    <div class="scheduledAppointmentBtns">
+      <button id="reschedule">Reschedule</button>
+      <button id="cancel">Cancel</button>
+    </div>
+  `
+    // Event delegation example
+    scheduledAppointmentContainer.addEventListener('click', function (event) {
+      if (event.target.id === 'reschedule') {
+        rescheduleAppointment()
+      } else if (event.target.id === 'cancel') {
+        cancelAppointment()
+      }
+    })
+
+    scheduledAppointmentContainer.appendChild(detailsContainer)
+
+    rescheduleActive = true
+  }
 }
