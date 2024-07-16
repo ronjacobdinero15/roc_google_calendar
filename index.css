@@ -466,16 +466,16 @@ textarea {
   }
 
   .appBody {
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
     height: 100%;
     padding: 25px;
   }
 
   .ceoDetails {
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+    margin: 0 auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr 2fr !important;
     width: 80%;
     gap: 20px;
   }

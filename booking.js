@@ -178,8 +178,8 @@ function returnAppointmentForm() {
     padding: 25px;
   `
   scheduledAppointment.setAttribute('style', 'display: none !important;')
-  ceoDetails.setAttribute('style', 'display: flex !important;')
-  appDetails.setAttribute('style', 'display: flex !important;')
+  ceoDetails.setAttribute('style', 'display: flex')
+  appDetails.setAttribute('style', 'display: flex')
 }
 
 function rescheduleAppointment() {
