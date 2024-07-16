@@ -64,8 +64,8 @@
                 id="name"
                 name="name"
                 required
-                value="Janno Gibbs"
                 autocomplete="name"
+                value="Janno Gibbs"
               />
 
               <label for="email"
@@ -78,8 +78,8 @@
                   class="email"
                   name="email"
                   required
-                  value="ronjacobdinero15@gmail.com"
                   autocomplete="email"
+                  value="ronjacobdinero15@gmail.com"
                 />
                 
               </div>
@@ -97,8 +97,8 @@
                 name="phone"
                 maxlength="18"
                 required
-                value="12312312312"
                 autocomplete="tel"
+                value="123456789"
               />
 
               <div class="dateTime">
@@ -109,8 +109,8 @@
                     id="date"
                     name="date"
                     required
-                    value="2024-07-17"
                     autocomplete="off"
+                    value="2024-07-21"
                   />
                 </div>
 
@@ -121,8 +121,8 @@
                     id="time"
                     name="time"
                     required
-                    value="09:00"
                     autocomplete="off"
+                    value="09:00"
                   />
                 </div>
 
@@ -194,17 +194,9 @@
                     <p>Terms may be updated on our website.</p>
                     <h4>Contact Information</h4>
                     <p>Contact us at [your contact information].</p>
-                    
-
-
-                    <!-- <h4>Reschedule policy</h4>
-                    <p>The reschedule must be before the scheduled time, if needed.</p>
-                    <h4>Cancellation policy</h4>
-                    <p>The cancellation must be before the scheduled time, if needed.</p> -->
                   </div>
                 </div>
               <!-- END OF POLICIES MODAL -->
-
 
             <!-- BOOKED MODAL -->
             <div id="bookedModal">
@@ -217,7 +209,7 @@
           </div>
           <div class="scheduledAppointment">
             <div class="checkContainer"><img src="./assets/img/check-success.svg" alt="scheduled appointment"></div>
-            <h1>This meeting is scheduled</h1>
+            <div class="appointmentStatus">This meeting is scheduled</div>
           </div>
         </div>
       </div>
@@ -228,5 +220,6 @@
     <script src="./assets/js/intlTelInputPreference.js"></script>
     <script src="./assets/js/policiesModal.js"></script>
     <script src="./assets/js/addGuest.js"></script>
+    <script src="./assets/js/scheduledAppointment.js"></script>
   </body>
 </html>
