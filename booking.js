@@ -1,39 +1,34 @@
 const CEO_PREFERRED_MINIMUM_APPOINTMENT_TIME = 60 // 1 Hour
 const CEO_APPOINTMENT_EMAIL = 'roc.appointments@gmail.com'
 
+let clientName = document.getElementById('name')
+let personalEmail = document.querySelector('.email')
+let date = document.getElementById('date')
+let time = document.getElementById('time')
+let description = document.getElementById('description')
+
+let modal = document.getElementById('appointmentFormModal')
+let attendees = []
+
 function submitForm(event) {
   event.preventDefault()
 
-  bookedModal()
+  scheduledAppointment()
 
   let myHeaders = new Headers()
   myHeaders.append('Content-Type', 'application/json')
 
-  let name = document.getElementById('name').value
-  let personalEmail = document.querySelector('.email').value
   let emails = document.querySelectorAll('.email')
   let phoneNumber = handlePhoneNumber()
-  let date = document.getElementById('date').value
-  let time = document.getElementById('time').value
-  let attendees = []
-
-  // if (emails.length > 0) {
-  //   emails.forEach(input => {
-  //     console.log(input.value)
-  //   })
-  // } else {
-  //   console.log(personal)
-  // }
 
   emails.forEach(emailInput => {
     attendees.push({ email: emailInput.value })
   })
 
-  let description = document.getElementById('description').value
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
   // Create a Date object in local time
-  let localDateTime = new Date(`${date}T${time}:00`)
+  let localDateTime = new Date(`${date.value}T${time.value}:00`)
 
   // Convert local time to UTC
   let utcDateTime = localDateTime.toISOString()
@@ -48,7 +43,7 @@ function submitForm(event) {
 
     // TODO: Must create a meeting link
     // TODO: Must email the client about this link
-    description: `What:\n60 Mins Meeting between <strong>Ron Clarin</strong> and <strong>${name}</strong>\n\nInvitee Time Zone:\n${timeZone}\n\nContact no.:\n+${phoneNumber}\n\nWho:\n\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${name}\n<a href="mailto:${personalEmail}">${personalEmail}</a>\n\nAdditional Notes:\n${description}`,
+    description: `What:\n60 Mins Meeting between <strong>Ron Clarin</strong> and <strong>${clientName.value}</strong>\n\nInvitee Time Zone:\n${timeZone}\n\nContact no.:\n+${phoneNumber}\n\nWho:\n\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${clientName.value}\n<a href="mailto:${personalEmail.value}">${personalEmail.value}</a>\n\nAdditional Notes:\n${description.value}`,
     start: {
       dateTime: utcDateTime,
       timeZone: 'UTC', // Use UTC time zone for Google Calendar API
@@ -76,6 +71,39 @@ function submitForm(event) {
     .catch(error => console.log('error', error))
 }
 
+function scheduledAppointment() {
+  const appTabBody = document.querySelector('.appTabBody')
+  const appBody = document.querySelector('.appBody')
+
+  const ceoDetails = document.querySelector('.ceoDetails')
+  const appDetails = document.querySelector('.appDetails')
+  const scheduledAppointment = document.querySelector('.scheduledAppointment')
+
+  appTabBody.style.cssText = 'width: 30vw !important;'
+  appBody.style.cssText = `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `
+  scheduledAppointment.setAttribute('style', 'display: flex !important;')
+  ceoDetails.setAttribute('style', 'display: none !important;')
+  appDetails.setAttribute('style', 'display: none !important;')
+
+  // SCHEDULED APPOINTMENT UI
+  const scheduledAppointmentContainer = document.querySelector(
+    '.scheduledAppointment'
+  )
+  const detailsContainer = document.createElement('div')
+
+  detailsContainer.innerHTML = `
+    <div class="scheduledAppointmentBtns">
+      <button id="reschedule" onclick="rescheduleAppointment()">Reschedule</button>
+      <button id="cancel" onclick="cancelAppointment()">Cancel</button>
+    </div>
+  `
+  scheduledAppointmentContainer.appendChild(detailsContainer)
+}
+
 function handlePhoneNumber() {
   let input = document.querySelector('#phone')
 
@@ -85,48 +113,55 @@ function handlePhoneNumber() {
   return input.value && countryCode + input.value
 }
 
-function bookedModal() {
-  let modal = document.getElementById('bookedModal')
-  modal.style.display = 'block'
-
-  let span = document.getElementsByClassName('close')[0]
-  span.onclick = function () {
-    modal.style.display = 'none'
-  }
-}
-
 // APPOINTMENT FORM MODAL
 function appointmentFormModal() {
-  let modal = document.getElementById('appointmentFormModal')
   modal.style.display = 'flex'
 }
 
 // CLOSE FORM
-async function closeAppointmentFormModal() {
-  let phoneNumber = await handlePhoneNumber()
-
-  let name = document.getElementById('name')
-  let email = document.querySelector('.email')
+function closeAppointmentFormModal() {
   let phone = document.getElementById('phone')
-  let date = document.getElementById('date')
-  let time = document.getElementById('time')
-  let description = document.getElementById('description')
 
-  let modal = document.getElementById('appointmentFormModal')
-
-  if (name.value || email.value || phone.value || date.value || time.value) {
+  if (
+    clientName.value ||
+    personalEmail.value ||
+    phone.value ||
+    date.value ||
+    time.value ||
+    attendees.length > 0
+  ) {
     const confirmModal = confirm(
       'Are you sure you want to exit the appointment form?'
     )
     if (!confirmModal) return
   }
 
-  name.value = ''
-  email.value = ''
+  const appTabBody = document.querySelector('.appTabBody')
+  const appBody = document.querySelector('.appBody')
+
+  const ceoDetails = document.querySelector('.ceoDetails')
+  const appDetails = document.querySelector('.appDetails')
+  const scheduledAppointment = document.querySelector('.scheduledAppointment')
+
+  appTabBody.style.cssText = 'width: 80vw !important;'
+  appBody.style.cssText = `
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    background-color: white;
+    height: 100%;
+    padding: 25px;
+  `
+  scheduledAppointment.setAttribute('style', 'display: none !important;')
+  ceoDetails.setAttribute('style', 'display: flex !important;')
+  appDetails.setAttribute('style', 'display: flex !important;')
+
+  clientName.value = ''
+  personalEmail.value = ''
   phone.value = ''
   date.value = ''
   time.value = ''
   description.value = ''
+  attendees = []
 
   modal.style.display = 'none'
 }

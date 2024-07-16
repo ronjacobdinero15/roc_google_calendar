@@ -4,8 +4,8 @@ function addGuest() {
   guestEmailContainer.classList.add('guestEmailContainer')
 
   guestEmailContainer.innerHTML = `
-        <input type="email" class="email guestEmail" name="email" placeholder="Guest Email" required/>
-        <button class="deleteButton">&times;</button>
+        <input type="email" class="email guestEmail" name="email" placeholder="Guest Email" autocomplete="off" required/>
+        <button class="deleteButton" onclick="deleteGuest()">&times;</button>
       `
 
   emailContainer.appendChild(guestEmailContainer)
