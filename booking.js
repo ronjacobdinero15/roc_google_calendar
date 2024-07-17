@@ -41,8 +41,6 @@ function submitForm(event) {
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   }
 
-  console.log(client)
-
   // Create a Date object in local time
   let localDateTime = new Date(`${date.value}T${time.value}:00`)
 
@@ -85,7 +83,6 @@ function submitForm(event) {
       .then(result => {
         eventId = result.id // Update eventId from the API response
         localStorage.setItem('eventId', eventId) // Store eventId persistently
-        console.log(eventId)
       })
       .catch(error => console.log('error', error))
   } else {
@@ -182,10 +179,6 @@ function returnAppointmentForm() {
   appDetails.setAttribute('style', 'display: flex')
 }
 
-function rescheduleAppointment() {
-  returnAppointmentForm()
-}
-
 function cancelAppointment() {
   let requestOptions = {
     method: 'delete',
@@ -219,11 +212,15 @@ function scheduledAppointment() {
   const appDetails = document.querySelector('.appDetails')
   const scheduledAppointment = document.querySelector('.scheduledAppointment')
 
-  appTabBody.style.cssText = 'width: 30vw !important;'
+  appTabBody.style.cssText = `
+    width: 30vw !important;
+    min-width: 300px;
+  `
   appBody.style.cssText = `
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 25px;
   `
   scheduledAppointment.setAttribute('style', 'display: flex !important;')
   ceoDetails.setAttribute('style', 'display: none !important;')
@@ -242,10 +239,9 @@ function scheduledAppointment() {
       <button id="cancel">Cancel</button>
     </div>
   `
-    // Event delegation example
     scheduledAppointmentContainer.addEventListener('click', function (event) {
       if (event.target.id === 'reschedule') {
-        rescheduleAppointment()
+        returnAppointmentForm()
       } else if (event.target.id === 'cancel') {
         cancelAppointment()
       }

@@ -81,7 +81,7 @@
                   autocomplete="email"
                   value="ronjacobdinero15@gmail.com"
                 />
-                
+                <!-- APPENDING GUEST EMAIL CONTAINERS HERE ON ADD GUEST BUTTON -->
               </div>
               <button type="button" id="addGuest">
                 <img src="./assets/img/add_people.svg" alt="add people">
@@ -154,9 +154,9 @@
                 name="description"
                 id="description"
                 value="Discussion about project updates"
-                placeholder="Please share any details or topics you'd like to discuss during the meeting..."
+                placeholder="Please share any details or topics you'd like to discuss during our meeting..."
                 autocomplete="off"
-                ></textarea>
+              ></textarea>
 
               <div class="cmdBtns">
                 <button class="submitBtn" type="submit">
@@ -178,34 +178,35 @@
               </footer>
               
               <!-- POLICIES MODAL -->
-                <div class="policiesModal" id="policiesModal">
-                  <div class="modal-content">
-                    <h1>By registering, you accept these terms.</h1>
-                    <hr>
-                    <h4>Scheduling</h4>
-                    <p>Appointments are based on availability.</p>
-                    <h4>Rescheduling and Cancellation</h4>
-                    <p>Reschedule or cancel 24 hours in advance.</p>
-                    <h4>Privacy</h4>
-                    <p>Your information is used solely for the service.</p>
-                    <h4>Liability</h4>
-                    <p>We are not liable for any service-related damages.</p>
-                    <h4>Changes to Terms</h4>
-                    <p>Terms may be updated on our website.</p>
-                    <h4>Contact Information</h4>
-                    <p>Contact us at +63 (046) 433-7590<br>or at 63 (0916) 3227642.</p>
-                  </div>
+              <div class="policiesModal" id="policiesModal">
+                <div class="modal-content">
+                  <h1>By registering, you accept these terms.</h1>
+                  <hr>
+                  <h4>Scheduling</h4>
+                  <p>Appointments are based on availability.</p>
+                  <h4>Rescheduling and Cancellation</h4>
+                  <p>Reschedule or cancel 24 hours in advance.</p>
+                  <h4>Privacy</h4>
+                  <p>Your information is used solely for the service.</p>
+                  <h4>Liability</h4>
+                  <p>We are not liable for any service-related damages.</p>
+                  <h4>Changes to Terms</h4>
+                  <p>Terms may be updated on our website.</p>
+                  <h4>Contact Information</h4>
+                  <p>Contact us at +63 (046) 433-7590<br>or at 63 (0916) 3227642.</p>
                 </div>
+              </div>
               <!-- END OF POLICIES MODAL -->
 
-            <!-- BOOKED MODAL -->
-            <div id="bookedModal">
-              <div class="bookedModal-content">
-                <span class="close">&times;</span>
-                <p>✅ Form submitted successfully!</p>
-              </div>
-            </div>
-            <!-- END OF BOOKED MODAL -->
+              <!-- BOOKED MODAL -->
+              <!-- <div id="bookedModal">
+                <div class="bookedModal-content">
+                  <span class="close">&times;</span>
+                  <p>✅ Form submitted successfully!</p>
+                </div>
+              </div> -->
+              <!-- END OF BOOKED MODAL -->
+
           </div>
           <div class="scheduledAppointment">
             <div class="checkContainer"><img src="./assets/img/check-success.svg" alt="scheduled appointment"></div>
@@ -217,8 +218,8 @@
 
     <script src="./booking.js"></script>
     <script src="./assets/js/addGuest.js"></script>
-    <script src="./assets/js/scheduledAppointment.js"></script>
 
+    <!-- PHONE NUMBER SCRIPTS -->
     <script src="./assets/js/intlTelInput.js"></script>
     <script src="./assets/js/intlTelInputPreference.js"></script>
     <script src="./assets/js/policiesModal.js"></script>
