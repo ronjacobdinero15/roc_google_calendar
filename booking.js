@@ -61,7 +61,7 @@ function submitForm(event) {
       body: JSON.stringify({
         summary: 'Client Meeting',
         // location: 'Event location details',
-        description: `What:\n60 Mins Meeting between <strong>Ron Clarin</strong> and <strong>${client.name}</strong>\n\nInvitee Time Zone:\n${client.timeZone}\n\nContact no.:\n+${client.phoneNumber}\n\nWho:\n\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${client.name}\n<a href="mailto:${client.personalEmail}">${client.personalEmail}</a>\n\nAdditional Notes:\n${client.description}`,
+        description: `<strong>What</strong>n60 Mins Meeting between Ron Clarin and ${client.name}\n\n<strong>Invitee Time Zone</strong>\n${client.timeZone}\n\n<strong>Contact no.</strong>\n+${client.phoneNumber}\n\n<strong>Who</strong>\n\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${client.name}\n<a href="mailto:${client.personalEmail}">${client.personalEmail}</a>\n\n<strong>Additional Notes</strong>\n${client.description}`,
         start: {
           dateTime: utcDateTime,
           timeZone: 'UTC', // Use UTC time zone for Google Calendar API
@@ -92,7 +92,7 @@ function submitForm(event) {
       redirect: 'follow',
       body: JSON.stringify({
         summary: 'Client Meeting',
-        description: `What:\n60 Mins Meeting between <strong>Ron Clarin</strong> and <strong>${client.name}</strong>\n\nInvitee Time Zone:\n${client.timeZone}\n\nContact no.:\n+${client.phoneNumber}\n\nWho:\n\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${client.name}\n<a href="mailto:${client.personalEmail}">${client.personalEmail}</a>\n\nAdditional Notes:\n${client.description}`,
+        description: `<strong>What</strong>n60 Mins Meeting between Ron Clarin and ${client.name}\n\n<strong>Invitee Time Zone</strong>\n${client.timeZone}\n\n<strong>Contact no.</strong>\n+${client.phoneNumber}\n\n<strong>Who</strong>\n\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${client.name}\n<a href="mailto:${client.personalEmail}">${client.personalEmail}</a>\n\n<strong>Additional Notes</strong>\n${client.description}`,
         start: { dateTime: utcDateTime, timeZone: 'UTC' },
         end: { dateTime: utcEndDateTime, timeZone: 'UTC' },
         sendNotifications: true,
