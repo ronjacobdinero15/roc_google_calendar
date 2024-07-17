@@ -74,9 +74,8 @@ function submitForm(event) {
         attendees,
       }),
     }
-
     fetch(
-      'https://v1.nocodeapi.com/rocappointments/calendar/eVzcIvSFHQgCDEuz/event?sendNotifications=true&sendUpdates=all',
+      'https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?calendarId=46237b98feac9bd44c94b5b47fb34b08ec4bcca24adb45f74d62171b235fccd4@group.calendar.google.com&sendNotifications=true&sendUpdates=all',
       requestOptions
     )
       .then(response => response.json())
@@ -102,7 +101,7 @@ function submitForm(event) {
     }
 
     fetch(
-      `https://v1.nocodeapi.com/rocappointments/calendar/eVzcIvSFHQgCDEuz/event?eventId=${eventId}&sendNotifications=true&sendUpdates=all`,
+      `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?eventId=${eventId}&calendarId=46237b98feac9bd44c94b5b47fb34b08ec4bcca24adb45f74d62171b235fccd4@group.calendar.google.com&sendNotifications=true&sendUpdates=all`,
       requestOptions
     )
       .then(response => response.json())
@@ -187,7 +186,7 @@ function cancelAppointment() {
   }
 
   fetch(
-    `https://v1.nocodeapi.com/rocappointments/calendar/eVzcIvSFHQgCDEuz/event?eventId=${eventId}&sendNotifications=true&sendUpdates=all`,
+    `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?eventId=${eventId}&calendarId=46237b98feac9bd44c94b5b47fb34b08ec4bcca24adb45f74d62171b235fccd4@group.calendar.google.com&sendNotifications=true&sendUpdates=all`,
     requestOptions
   )
     .then(response => response.text())
