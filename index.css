@@ -361,6 +361,27 @@ textarea {
   display: block;
 }
 
+/* TIME INPUT */
+.flatpickr-calendar {
+  display: block !important;
+}
+
+.flatpickr-calendar:nth-of-type(3) {
+  width: 150px !important;
+}
+
+.numInputWrapper:nth-of-type(2) {
+  display: none;
+}
+
+.flatpickr-time-separator {
+  display: none !important;
+}
+
+.flatpickr-minute {
+  display: none !important;
+}
+
 /* BOOKED MODAL */
 /* #bookedModal {
   display: none;

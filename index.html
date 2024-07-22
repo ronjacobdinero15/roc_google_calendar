@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="./assets/css/demo.css" />
     <link rel="stylesheet" href="./assets/css/intlTelInput.css" />
     <link rel="stylesheet" href="./index.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+  />
   </head>
   <body>
     <button onclick="appointmentFormModal()">Open Appointment Form</button>
@@ -57,8 +61,7 @@
             </div>
           </div>
           <div class="appDetails">
-            <!-- NOTE: ADD onsubmit="submitForm(event)" on this form temporarily disabled so it does not reduce the API request limits-->
-            <form >
+            <form onsubmit="submitForm(event)">
               <label for="name">Name <span class="asterisk">*</span></label>
               <input
                 type="text"
@@ -66,7 +69,6 @@
                 name="name"
                 required
                 autocomplete="name"
-                value="Janno Gibbs"
               />
 
               <label for="email"
@@ -80,7 +82,6 @@
                   name="email"
                   required
                   autocomplete="email"
-                  value="ronjacobdinero15@gmail.com"
                 />
                 <!-- APPENDING GUEST EMAIL CONTAINERS HERE ON ADD GUEST BUTTON -->
               </div>
@@ -99,7 +100,6 @@
                 maxlength="18"
                 required
                 autocomplete="tel"
-                value="123456789"
               />
 
               <div class="dateTime">
@@ -109,9 +109,9 @@
                     type="date"
                     id="date"
                     name="date"
+                    placeholder="Select Date" 
                     required
                     autocomplete="off"
-                    value="2024-07-18"
                   />
                 </div>
 
@@ -123,7 +123,7 @@
                     name="time"
                     required
                     autocomplete="off"
-                    value="09:00"
+                    placeholder="--:--"
                   />
                 </div>
 
@@ -219,6 +219,8 @@
 
     <script src="./booking.js"></script>
     <script src="./assets/js/addGuest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="./assets/js/flatpickr.js"></script>
 
     <!-- PHONE NUMBER SCRIPTS -->
     <script src="./assets/js/intlTelInput.js"></script>

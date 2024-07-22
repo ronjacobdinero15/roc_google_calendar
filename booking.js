@@ -21,6 +21,13 @@ myHeaders.append('Content-Type', 'application/json')
 function submitForm(event) {
   event.preventDefault()
 
+  // console.log(typeof date.value, date.value, typeof time.value, time.value)
+  if (date.value === '' || time.value === '') return
+
+  const dateValue = date.value
+  const timeValue = time.value
+  // alert(`Date: ${dateValue}\nTime: ${timeValue}`)
+
   scheduledAppointment()
 
   let emails = document.querySelectorAll('.email')
@@ -35,8 +42,8 @@ function submitForm(event) {
     personalEmail: personalEmail.value,
     guestEmails: attendees.slice(1),
     phoneNumber: handlePhoneNumber(),
-    date: date.value,
-    time: time.value,
+    date: dateValue,
+    time: timeValue,
     description: description.value,
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   }
@@ -61,7 +68,7 @@ function submitForm(event) {
       body: JSON.stringify({
         summary: 'Client Meeting',
         // location: 'Event location details',
-        description: `<strong>What</strong>n60 Mins Meeting between Ron Clarin and ${client.name}\n\n<strong>Invitee Time Zone</strong>\n${client.timeZone}\n\n<strong>Contact no.</strong>\n+${client.phoneNumber}\n\n<strong>Who</strong>\n\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${client.name}\n<a href="mailto:${client.personalEmail}">${client.personalEmail}</a>\n\n<strong>Additional Notes</strong>\n${client.description}`,
+        description: `<strong>What</strong>\n60 Mins Meeting between Ron Clarin and ${client.name}\n\n<strong>Invitee Time Zone</strong>\n${client.timeZone}\n\n<strong>Contact no.</strong>\n+${client.phoneNumber}\n\n<strong>Who</strong>\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${client.name}\n<a href="mailto:${client.personalEmail}">${client.personalEmail}</a>\n\n<strong>Additional Notes</strong>\n${client.description}`,
         start: {
           dateTime: utcDateTime,
           timeZone: 'UTC', // Use UTC time zone for Google Calendar API
@@ -75,7 +82,7 @@ function submitForm(event) {
       }),
     }
     fetch(
-      'https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?calendarId=46237b98feac9bd44c94b5b47fb34b08ec4bcca24adb45f74d62171b235fccd4@group.calendar.google.com&sendNotifications=true&sendUpdates=all',
+      `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?calendarId=46237b98feac9bd44c94b5b47fb34b08ec4bcca24adb45f74d62171b235fccd4@group.calendar.google.com&sendNotifications=true&sendUpdates=all`,
       requestOptions
     )
       .then(response => response.json())
@@ -92,7 +99,7 @@ function submitForm(event) {
       redirect: 'follow',
       body: JSON.stringify({
         summary: 'Client Meeting',
-        description: `<strong>What</strong>n60 Mins Meeting between Ron Clarin and ${client.name}\n\n<strong>Invitee Time Zone</strong>\n${client.timeZone}\n\n<strong>Contact no.</strong>\n+${client.phoneNumber}\n\n<strong>Who</strong>\n\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${client.name}\n<a href="mailto:${client.personalEmail}">${client.personalEmail}</a>\n\n<strong>Additional Notes</strong>\n${client.description}`,
+        description: `<strong>What</strong>\n60 Mins Meeting between Ron Clarin and ${client.name}\n\n<strong>Invitee Time Zone</strong>\n${client.timeZone}\n\n<strong>Contact no.</strong>\n+${client.phoneNumber}\n\n<strong>Who</strong>\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${client.name}\n<a href="mailto:${client.personalEmail}">${client.personalEmail}</a>\n\n<strong>Additional Notes</strong>\n${client.description}`,
         start: { dateTime: utcDateTime, timeZone: 'UTC' },
         end: { dateTime: utcEndDateTime, timeZone: 'UTC' },
         sendNotifications: true,
