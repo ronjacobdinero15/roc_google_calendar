@@ -1,58 +1,71 @@
-const dateInput = document.getElementById('date')
-const timeInput = document.getElementById('time')
+document.addEventListener('DOMContentLoaded', function () {
+  const { DateTime } = luxon
+  const dateInput = document.getElementById('date')
+  const timeSelect = document.getElementById('time')
+  const availableTimes = [
+    '08:00',
+    '09:00',
+    '10:00',
+    '11:00',
+    '12:00',
+    '13:00',
+    '14:00',
+    '15:00',
+    '16:00',
+  ]
 
-function toggleTimeInput() {
-  if (dateInput.value) {
-    timeInput.disabled = false
-  } else {
-    timeInput.disabled = true
-    timeInput.value = ''
-  }
-}
+  function populateTimeSelect(localTimeZone) {
+    // Clear existing options
+    timeSelect.innerHTML = '<option value="">Select Time</option>'
 
-dateInput.addEventListener('change', toggleTimeInput)
-
-const availableTimes = {
-  Sun: [],
-  Mon: ['08:00', '16:00'],
-  Tue: ['08:00', '16:00'],
-  Wed: ['08:00', '16:00'],
-  Thu: ['08:00', '16:00'],
-  Fri: ['08:00', '16:00'],
-  Sat: ['08:00', '16:00'],
-}
-
-flatpickr(dateInput, {
-  altInput: true,
-  altFormat: 'F j, Y',
-  dateFormat: 'Y-m-d',
-  minDate: 'today',
-  disable: [
-    function (date) {
-      // Disable Sundays
-      return date.getDay() === 0
-    },
-  ],
-  onChange: function (selectedDates, dateStr, instance) {
-    const dayOfWeek = new Date(dateStr).toLocaleString('en-US', {
-      weekday: 'short',
+    // Get current local date and time
+    const now = DateTime.now().setZone(localTimeZone)
+    const selectedDate = DateTime.fromISO(dateInput.value, {
+      zone: localTimeZone,
     })
 
-    const times = availableTimes[dayOfWeek]
-    if (times) {
-      timeInput._flatpickr.set('minTime', times[0])
-      timeInput._flatpickr.set('maxTime', times[1])
-    } else {
-      timeInput._flatpickr.set('minTime', '00:00')
-      timeInput._flatpickr.set('maxTime', '00:00')
-    }
-  },
-})
+    // Convert available times to user's local time and disable past times
+    availableTimes.forEach(time => {
+      const localDateTime = DateTime.fromISO(
+        `${selectedDate.toISODate()}T${time}:00`,
+        { zone: 'Asia/Shanghai' }
+      ).setZone(localTimeZone)
 
-flatpickr(timeInput, {
-  enableTime: true,
-  noCalendar: true,
-  dateFormat: 'H:00',
-  time_24hr: false,
-  minuteIncrement: 60,
+      const option = document.createElement('option')
+      option.value = localDateTime.toFormat('HH:mm')
+      option.textContent = localDateTime.toFormat('HH:mm')
+
+      // Disable past times for the selected day
+      if (selectedDate.toISODate() === now.toISODate() && localDateTime < now) {
+        option.disabled = true
+      }
+
+      timeSelect.appendChild(option)
+    })
+  }
+
+  function updateAvailableTimes() {
+    const selectedDate = dateInput.value
+    if (selectedDate) {
+      const localTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+      populateTimeSelect(localTimeZone)
+    }
+  }
+
+  dateInput.addEventListener('change', updateAvailableTimes)
+
+  flatpickr(dateInput, {
+    altInput: true,
+    altFormat: 'F j, Y',
+    dateFormat: 'Y-m-d',
+    minDate: 'today',
+    disable: [
+      date => date.getDay() === 0, // Disable Sundays
+    ],
+  })
+
+  // Initial population if date is already set
+  if (dateInput.value) {
+    updateAvailableTimes()
+  }
 })

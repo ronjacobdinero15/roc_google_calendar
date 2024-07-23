@@ -12,19 +12,22 @@ body {
 }
 
 input,
-textarea {
+textarea,
+select {
   border: 1px solid var(--border-color);
   padding: 8px;
   border-radius: 4px;
 }
 
 input::placeholder,
-textarea::placeholder {
+textarea::placeholder,
+select::placeholder {
   color: var(--border-color);
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
   border: 2px solid var(--roc-color) !important;
   outline: none;
 }
@@ -260,6 +263,10 @@ textarea {
 .appDetails .dateTime input,
 .appDetails .dateTime select {
   cursor: pointer;
+}
+
+.appDetails #time {
+  margin: 10px 0 15px 0;
 }
 
 .appDetails #description {
