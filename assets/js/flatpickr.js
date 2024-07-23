@@ -1,3 +1,17 @@
+const dateInput = document.getElementById('date')
+const timeInput = document.getElementById('time')
+
+function toggleTimeInput() {
+  if (dateInput.value) {
+    timeInput.disabled = false
+  } else {
+    timeInput.disabled = true
+    timeInput.value = ''
+  }
+}
+
+dateInput.addEventListener('change', toggleTimeInput)
+
 const availableTimes = {
   Sun: [],
   Mon: ['08:00', '16:00'],
@@ -7,9 +21,6 @@ const availableTimes = {
   Fri: ['08:00', '16:00'],
   Sat: ['08:00', '16:00'],
 }
-
-const dateInput = document.getElementById('date')
-const timeInput = document.getElementById('time')
 
 flatpickr(dateInput, {
   altInput: true,

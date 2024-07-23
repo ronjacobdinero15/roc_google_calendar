@@ -69,6 +69,7 @@
                 name="name"
                 required
                 autocomplete="name"
+                value="Janno Gibbs"
               />
 
               <label for="email"
@@ -82,6 +83,7 @@
                   name="email"
                   required
                   autocomplete="email"
+                  value="ronjacobdinero15@gmail.com"
                 />
                 <!-- APPENDING GUEST EMAIL CONTAINERS HERE ON ADD GUEST BUTTON -->
               </div>
@@ -100,6 +102,7 @@
                 maxlength="18"
                 required
                 autocomplete="tel"
+                value="9996709043"
               />
 
               <div class="dateTime">
@@ -124,7 +127,13 @@
                     required
                     autocomplete="off"
                     placeholder="--:--"
+                    disabled
                   />
+                </div>
+
+                <div>
+                  <label for="timeZone">Timezone</label>
+                  <input id="timeZone" type="text" disabled>
                 </div>
 
                 <!-- NOTE: -->
@@ -207,7 +216,6 @@
                 </div>
               </div> -->
               <!-- END OF BOOKED MODAL -->
-
           </div>
           <div class="scheduledAppointment">
             <div class="checkContainer"><img src="./assets/img/check-success.svg" alt="scheduled appointment"></div>
@@ -217,8 +225,10 @@
       </div>
     </div>
 
-    <script src="./booking.js"></script>
+    <script src="./assets/js/booking.js"></script>
     <script src="./assets/js/addGuest.js"></script>
+    
+    <!-- DATE AND TIME UI -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="./assets/js/flatpickr.js"></script>
 
