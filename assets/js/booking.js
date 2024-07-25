@@ -10,6 +10,14 @@ let personalEmail = document.querySelector('.email')
 let date = document.getElementById('date')
 let time = document.getElementById('time')
 let description = document.getElementById('description')
+
+let locationMeetingInfo = document.getElementById('locationMeetingInfo')
+let whatMeetingInfo = document.getElementById('whatMeetingInfo')
+let timeZoneMeetingInfo = document.getElementById('timeZoneMeetingInfo')
+let contactMeetingInfo = document.getElementById('contactMeetingInfo')
+let whoMeetingInfo = document.getElementById('whoMeetingInfo')
+let additionalMeetingInfo = document.getElementById('additionalMeetingInfo')
+
 let appointmentFormModalDisplay = document.getElementById(
   'appointmentFormModal'
 )
@@ -52,6 +60,8 @@ function submitForm(e) {
   client.description = description.value
   client.timeZone = timeZone
 
+  scheduledAppointmentInfo()
+
   // Create a Date object in local time
   let localDateTime = new Date(`${client.date}T${client.time}:00`)
   // Calculate the end time (60 minutes later) in UTC
@@ -76,13 +86,13 @@ function submitForm(e) {
         timeZone,
       },
       sendNotifications: true,
-      attendees,
+      attendees: [{ email: CEO_APPOINTMENT_EMAIL }, ...attendees],
     }),
   }
 
   const apiUrl = eventId
-    ? `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?eventId=${eventId}&calendarId=46237b98feac9bd44c94b5b47fb34b08ec4bcca24adb45f74d62171b235fccd4@group.calendar.google.com`
-    : `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?calendarId=46237b98feac9bd44c94b5b47fb34b08ec4bcca24adb45f74d62171b235fccd4@group.calendar.google.com`
+    ? `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?eventId=${eventId}&sendNotifications=true&sendUpdates=all`
+    : `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?sendNotifications=true&sendUpdates=all`
 
   fetch(apiUrl, requestOptions)
     .then(response => response.json())
@@ -94,6 +104,15 @@ function submitForm(e) {
       }
     })
     .catch(error => console.log('error', error))
+}
+
+function scheduledAppointmentInfo() {
+  locationMeetingInfo.innerHTML = `<a href=${GOOGLE_MEET_LINK} target="_blank">${GOOGLE_MEET_LINK}</a>`
+  whatMeetingInfo.innerHTML = `60 Mins Meeting between Ron Clarin and ${client.name}`
+  timeZoneMeetingInfo.innerHTML = `${client.timeZone}`
+  contactMeetingInfo.innerHTML = `+${client.phoneNumber}`
+  whoMeetingInfo.innerHTML = `Ron Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}"><br>${CEO_APPOINTMENT_EMAIL}</a><br><br>${client.name}\n<a href="mailto:${client.personalEmail}"><br>${client.personalEmail}</a>`
+  additionalMeetingInfo.innerHTML = `${client.description}`
 }
 
 function handlePhoneNumber() {
@@ -174,8 +193,7 @@ function cancelAppointment() {
   }
 
   fetch(
-    `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?eventId=${eventId}&calendarId=46237b98feac9bd44c94b5b47fb34b08ec4bcca24adb45f74d62171b235fccd4@group.calendar.google.com&sendNotifications=true&sendUpdates=all`,
-    `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?eventId=${eventId}&calendarId=46237b98feac9bd44c94b5b47fb34b08ec4bcca24adb45f74d62171b235fccd4@group.calendar.google.com&sendNotifications=true&sendUpdates=all`,
+    `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?eventId=${eventId}&sendNotifications=true&sendUpdates=all`,
     requestOptions
   )
     .then(response => response.text())
@@ -201,7 +219,7 @@ function scheduledAppointment() {
   const scheduledAppointment = document.querySelector('.scheduledAppointment')
 
   appTabBody.style.cssText = `
-    width: 30vw !important;
+    width: 50vw !important;
     min-width: 300px;
   `
   appBody.style.cssText = `
