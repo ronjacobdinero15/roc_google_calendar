@@ -341,12 +341,14 @@ textarea {
   color: black;
 }
 
-button {
+button,
+.back {
   transition: background-color 0.15s, color 0.15s, border 0.15s !important;
 }
 
-button:hover {
-  background-color: #8f8f8f !important;
+button:hover,
+.back:hover {
+  background-color: rgb(188, 188, 188) !important;
   color: white !important;
   border: none !important;
 }
