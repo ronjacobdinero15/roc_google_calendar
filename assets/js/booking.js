@@ -1,5 +1,5 @@
 const CEO_PREFERRED_MINIMUM_APPOINTMENT_TIME = 60 // 1 Hour
-const CEO_APPOINTMENT_EMAIL = 'roc.appointments.123@gmail.com'
+const CEO_APPOINTMENT_EMAIL = 'roc.appointmentscheduling@gmail.com'
 const GOOGLE_MEET_LINK = 'https://meet.google.com/zfh-imfr-kdc'
 
 // Initialize eventId from localStorage if available
@@ -11,12 +11,14 @@ let date = document.getElementById('date')
 let time = document.getElementById('time')
 let description = document.getElementById('description')
 
+let methodMeetingInfo = document.getElementById('methodMeetingInfo')
 let locationMeetingInfo = document.getElementById('locationMeetingInfo')
 let whatMeetingInfo = document.getElementById('whatMeetingInfo')
 let timeZoneMeetingInfo = document.getElementById('timeZoneMeetingInfo')
 let contactMeetingInfo = document.getElementById('contactMeetingInfo')
 let whoMeetingInfo = document.getElementById('whoMeetingInfo')
 let additionalMeetingInfo = document.getElementById('additionalMeetingInfo')
+let method = document.getElementById('method')
 
 let appointmentFormModalDisplay = document.getElementById(
   'appointmentFormModal'
@@ -32,6 +34,8 @@ let client = {
   time: '',
   description: '',
   timeZone: '',
+  method: '',
+  preferredBranch: '',
 }
 let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 let timeZoneInput = document.querySelector('#timeZone')
@@ -59,6 +63,20 @@ function submitForm(e) {
   client.time = time.value
   client.description = description.value
   client.timeZone = timeZone
+  client.method = method.value
+
+  if (client.method === 'Office visit') {
+    const location = document.getElementById('location').value
+
+    if (location === 'Manila') {
+      client.preferredBranch = ''
+    } else if (location === 'Laguna') {
+      client.preferredBranch = ''
+    } else if (location === 'Gen. Trias Cavite') {
+      client.preferredBranch =
+        'Blk98 Lot25 Beaumont Street, Village 3 Metro South Subdivision, General Trias, 4107 Cavite'
+    }
+  }
 
   scheduledAppointmentInfo()
 
@@ -75,8 +93,14 @@ function submitForm(e) {
     redirect: 'follow',
     body: JSON.stringify({
       summary: 'Client Meeting',
-      location: GOOGLE_MEET_LINK,
-      description: `<strong>What</strong>\n60 Mins Meeting between Ron Clarin and ${client.name}\n\n<strong>Invitee Time Zone</strong>\n${client.timeZone}\n\n<strong>Contact no.</strong>\n+${client.phoneNumber}\n\n<strong>Who</strong>\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${client.name}\n<a href="mailto:${client.personalEmail}">${client.personalEmail}</a>\n\n<strong>Additional Notes</strong>\n${client.description}`,
+      location:
+        client.method === 'Google meeting'
+          ? GOOGLE_MEET_LINK
+          : client.method === 'Office visit'
+          ? client.preferredBranch
+          : '',
+      description: `<strong>Method</strong>\n${client.method}\n\n<strong>What</strong>\n60 Mins Meeting between Ron Clarin and ${client.name}\n\n<strong>Invitee Time Zone</strong>\n${client.timeZone}\n\n<strong>Contact no.</strong>\n+${client.phoneNumber}\n\n<strong>Who</strong>\nRon Clarin - Organizer\n<a href="mailto:${CEO_APPOINTMENT_EMAIL}">${CEO_APPOINTMENT_EMAIL}</a>\n\n${client.name}\n<a href="mailto:${client.personalEmail}">${client.personalEmail}</a>\n\n<strong>Additional Notes</strong>\n${client.description}`,
+
       start: {
         dateTime: localDateTime.toISOString(),
         timeZone,
@@ -91,8 +115,8 @@ function submitForm(e) {
   }
 
   const apiUrl = eventId
-    ? `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?eventId=${eventId}&sendNotifications=true&sendUpdates=all`
-    : `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?sendNotifications=true&sendUpdates=all`
+    ? `https://v1.nocodeapi.com/rocappointments1/calendar/MFItuKvjPMtspETk/event?eventId=${eventId}&sendNotifications=true&sendUpdates=all`
+    : `https://v1.nocodeapi.com/rocappointments1/calendar/MFItuKvjPMtspETk/event?sendNotifications=true&sendUpdates=all`
 
   fetch(apiUrl, requestOptions)
     .then(response => response.json())
@@ -107,7 +131,12 @@ function submitForm(e) {
 }
 
 function scheduledAppointmentInfo() {
-  locationMeetingInfo.innerHTML = `<a href=${GOOGLE_MEET_LINK} target="_blank">${GOOGLE_MEET_LINK}</a>`
+  methodMeetingInfo.innerHTML = client.method
+  if (client.method === 'Google meeting') {
+    locationMeetingInfo.innerHTML = `<a href=${GOOGLE_MEET_LINK} target="_blank">${GOOGLE_MEET_LINK}</a>`
+  } else if (client.method === 'Office visit') {
+    locationMeetingInfo.innerHTML = client.preferredBranch
+  }
   whatMeetingInfo.innerHTML = `60 Mins Meeting between Ron Clarin and ${client.name}`
   timeZoneMeetingInfo.innerHTML = `${client.timeZone}`
   contactMeetingInfo.innerHTML = `+${client.phoneNumber}`
@@ -193,7 +222,7 @@ function cancelAppointment() {
   }
 
   fetch(
-    `https://v1.nocodeapi.com/rocappointments12345/calendar/VzXJdjEnMMeVmhBv/event?eventId=${eventId}&sendNotifications=true&sendUpdates=all`,
+    `https://v1.nocodeapi.com/rocappointments1/calendar/MFItuKvjPMtspETk/event?eventId=${eventId}&sendNotifications=true&sendUpdates=all`,
     requestOptions
   )
     .then(response => response.text())
@@ -219,7 +248,7 @@ function scheduledAppointment() {
   const scheduledAppointment = document.querySelector('.scheduledAppointment')
 
   appTabBody.style.cssText = `
-    width: 50vw !important;
+    width: 40vw !important;
     min-width: 300px;
   `
   appBody.style.cssText = `

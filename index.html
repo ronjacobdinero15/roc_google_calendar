@@ -44,16 +44,29 @@
                 Schedule a tailored graphic design consultation to address your
                 specific business needs.
               </p>
-              <div class="googleMeeting">
-                <img
-                  class="meetingIcon"
-                  src="./assets/img/location.svg"
-                  alt="google meet"
-                />
-                <span>
-                  Google Meet - This will be an online meeting via Google Meet.
-                  The meeting link will be sent to your email.
-                </span>
+              <div class="methodContainer" required>
+                <select id="method">
+                  <option value="" disabled>Select meeting method</option>
+                  <option value="Google meeting" selected>
+                    Google meeting
+                  </option>
+                  <option value="Office visit">Office visit</option>
+                  <option value="Phone call">Phone call</option>
+                </select>
+
+                <div
+                  id="locationContainer"
+                  style="display: none; margin-top: 10px"
+                >
+                  <select id="location">
+                    <option value="" disabled>Select branch</option>
+                    <option value="Manila" disabled>Manila</option>
+                    <option value="Laguna" disabled>Laguna</option>
+                    <option value="Gen. Trias Cavite" selected>
+                      Gen. Trias Cavite
+                    </option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
@@ -66,6 +79,7 @@
                 name="name"
                 required
                 autocomplete="name"
+                value="Jacob"
               />
               <label for="email"
                 >Email address <span class="asterisk">*</span></label
@@ -79,6 +93,7 @@
                   required
                   autocomplete="email"
                   placeholder="Your Email"
+                  value="ronjacobdinero15@gmail.com"
                 />
               </div>
               <button type="button" id="addGuest">
@@ -95,6 +110,7 @@
                 maxlength="18"
                 required
                 autocomplete="tel"
+                value="123"
               />
               <div class="dateTime">
                 <div>
@@ -183,6 +199,11 @@
             </div>
             <div class="meetingInfo">
               <div>
+                <strong>Method</strong><br />
+                <p id="methodMeetingInfo" class="appointmentInfo"></p>
+              </div>
+              <br />
+              <div>
                 <strong>Location</strong><br />
                 <p id="locationMeetingInfo" class="appointmentInfo"></p>
               </div>
@@ -225,5 +246,17 @@
     <script src="./assets/js/intlTelInputPreference.js"></script>
     <script src="./assets/js/policiesModal.js"></script>
     <script src="./assets/js/flatpickr.js"></script>
+    <script>
+      document.getElementById('method').addEventListener('change', function () {
+        const method = this.value
+        const locationContainer = document.getElementById('locationContainer')
+
+        if (method === 'Office visit') {
+          locationContainer.style.display = 'block'
+        } else {
+          locationContainer.style.display = 'none'
+        }
+      })
+    </script>
   </body>
 </html>

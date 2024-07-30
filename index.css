@@ -37,6 +37,11 @@ textarea {
   font-size: 1rem;
 }
 
+#method,
+#location {
+  width: 150px;
+}
+
 :root {
   --roc-color: #008fc3;
   --border-color: #aeaeae;
@@ -159,10 +164,10 @@ textarea {
   gap: 10px;
 }
 
-.ceoDetails .googleMeeting {
+/* .ceoDetails .googleMeeting {
   display: inline;
   align-items: center;
-}
+} */
 
 .ceoDetails .meetingIcon {
   width: 20px;
